@@ -10,7 +10,7 @@ import copy
 import stat
 import os
 
-exeFolder = os.path.dirname(sys.argv[0]) + "\\"
+exeFolder = os.path.dirname(sys.argv[0])
 
 if len(sys.argv) > 1:
     print("The 'Drag and Dropped' File Path is:" ,sys.argv[1])
@@ -229,7 +229,7 @@ def CreateCMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChange
     UserData = GetUserData(HandSM)
 
     #parse, edit and append SMSI
-    hkbStateMachineStateInfo = etree.parse("HavokClasses/hkbStateMachineStateInfo.xml", parser=parser).getroot()
+    hkbStateMachineStateInfo = etree.parse(os.path.join(exeFolder, "HavokClasses/hkbStateMachineStateInfo.xml"), parser=parser).getroot()
     hkbStateMachineStateInfo.set("name", "#" + str(NameID))
     hkbStateMachineStateInfo.find('hkparam[@name="generator"]').text = "#" + str(NameID + 1)
     hkbStateMachineStateInfo.find('hkparam[@name="name"]').text = CMSGName
@@ -237,7 +237,7 @@ def CreateCMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChange
     __data__.append(hkbStateMachineStateInfo)
 
     #parse, edit and append CMSG
-    CustomManualSelectorGenerator = etree.parse("HavokClasses/CustomManualSelectorGenerator.xml", parser=parser).getroot()
+    CustomManualSelectorGenerator = etree.parse(os.path.join(exeFolder, "HavokClasses/CustomManualSelectorGenerator.xml"), parser=parser).getroot()
     CustomManualSelectorGenerator.set("name", "#" + str(NameID + 1))
     CustomManualSelectorGenerator.find('hkparam[@name="userData"]').text = str(UserData)
     CustomManualSelectorGenerator.find('hkparam[@name="name"]').text = CMSGName + "_CMSG"
@@ -283,7 +283,7 @@ def CreateWACMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChan
     UserData = GetUserData(HandSM)
 
     #parse, edit and append SMSI
-    hkbStateMachineStateInfo = etree.parse("HavokClasses/hkbStateMachineStateInfo.xml", parser=parser).getroot()
+    hkbStateMachineStateInfo = etree.parse(os.path.join(exeFolder, "HavokClasses/hkbStateMachineStateInfo.xml"), parser=parser).getroot()
     hkbStateMachineStateInfo.set("name", "#" + str(NameID))
     hkbStateMachineStateInfo.find('hkparam[@name="generator"]').text = "#" + str(NameID + 1)
     hkbStateMachineStateInfo.find('hkparam[@name="name"]').text = CMSGName
@@ -291,7 +291,7 @@ def CreateWACMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChan
     __data__.append(hkbStateMachineStateInfo)
 
     #parse, edit and append hkbManualSelectorGenerator
-    hkbManualSelectorGenerator = etree.parse("HavokClasses/hkbManualSelectorGenerator.xml", parser=parser).getroot()
+    hkbManualSelectorGenerator = etree.parse(os.path.join(exeFolder, "HavokClasses/hkbManualSelectorGenerator.xml"), parser=parser).getroot()
     hkbManualSelectorGenerator.set("name", "#" + str(NameID + 1))
     hkbManualSelectorGenerator.find('hkparam[@name="variableBindingSet"]').text = "#" + str(NameID + 2)
     hkbManualSelectorGenerator.find('hkparam[@name="generators"]').text = "\n#" + str(NameID + 3) + "\n#" + str(NameID + 4)
@@ -302,13 +302,13 @@ def CreateWACMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChan
     __data__.append(hkbManualSelectorGenerator)
 
     #parse, edit and append hkbVariableBindingSet
-    hkbVariableBindingSet = etree.parse("HavokClasses/hkbVariableBindingSet.xml", parser=parser).getroot()
+    hkbVariableBindingSet = etree.parse(os.path.join(exeFolder, "HavokClasses/hkbVariableBindingSet.xml"), parser=parser).getroot()
     hkbVariableBindingSet.set("name", "#" + str(NameID + 2))
     hkbVariableBindingSet.find('hkparam[@name="bindings"]/hkobject/hkparam[@name="variableIndex"]').text = str(variableIndex)
     __data__.append(hkbVariableBindingSet)
 
     #parse, edit and append CMSG
-    CustomManualSelectorGenerator = etree.parse("HavokClasses/CustomManualSelectorGenerator.xml", parser=parser).getroot()
+    CustomManualSelectorGenerator = etree.parse(os.path.join(exeFolder, "HavokClasses/CustomManualSelectorGenerator.xml"), parser=parser).getroot()
     CustomManualSelectorGenerator.set("name", "#" + str(NameID + 3))
     CustomManualSelectorGenerator.find('hkparam[@name="userData"]').text = str(UserData)
     CustomManualSelectorGenerator.find('hkparam[@name="name"]').text = CMSGName + "_CMSG"
@@ -318,7 +318,7 @@ def CreateWACMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChan
     __data__.append(CustomManualSelectorGenerator)
 
     #parse, edit and append NoPoints_CMSG
-    CustomManualSelectorGeneratorNoPoints = etree.parse("HavokClasses/CustomManualSelectorGenerator.xml", parser=parser).getroot()
+    CustomManualSelectorGeneratorNoPoints = etree.parse(os.path.join(exeFolder, "HavokClasses/CustomManualSelectorGenerator.xml"), parser=parser).getroot()
     CustomManualSelectorGeneratorNoPoints.set("name", "#" + str(NameID + 4))
     CustomManualSelectorGeneratorNoPoints.find('hkparam[@name="userData"]').text = str(UserData)
     CustomManualSelectorGeneratorNoPoints.find('hkparam[@name="name"]').text = CMSGName + "_NoPoints_CMSG"
@@ -369,7 +369,7 @@ def CheckAndAppendAnim(TaeID, AnimID):
                 print("Animation " + TaeName + "_" + AnimName + " is already registered.")
                 return
 
-    hkbClipGenerator = etree.parse("HavokClasses/hkbClipGenerator.xml", parser=parser).getroot()
+    hkbClipGenerator = etree.parse(os.path.join(exeFolder, "HavokClasses/hkbClipGenerator.xml"), parser=parser).getroot()
     hkbClipGenerator.find("hkparam[@name='name']").text = TaeName + "_" + AnimName + ".hkx"
     hkbClipGenerator.find("hkparam[@name='animationName']").text = TaeName + "_" + AnimName
 
@@ -436,13 +436,13 @@ def CreateVariable(Name):
 
 # read config
 config = configparser.ConfigParser(allow_no_value=True)
-config.read_file(open(exeFolder + "config.ini"))
+config.read_file(open(os.path.join(exeFolder, "config.ini")))
 
 #get AnimIDs
 AnimIDType = config["General"]["animidmode"].lower()
 if AnimIDType != "custom":
     AnimDef = configparser.ConfigParser(allow_no_value=True)
-    AnimDef.read_file(open(exeFolder + "PresetDefinitions.ini"))
+    AnimDef.read_file(open(os.path.join(exeFolder, "PresetDefinitions.ini")))
     AnimIDList = list(map(int, AnimDef.options(AnimIDType)))
 else:
     AnimIDList = list(map(int, config.options("CustomAnimID")))
@@ -451,7 +451,7 @@ else:
 TaeMode = config["General"]["taemode"].lower()
 if TaeMode != "custom":
     TaeDef = configparser.ConfigParser(allow_no_value=True)
-    TaeDef.read_file(open(exeFolder + "TaeIDList.ini"))
+    TaeDef.read_file(open(os.path.join(exeFolder, "TaeIDList.ini")))
     TaeIDList = []
     for TaeID in TaeDef.options(TaeMode):
         if " - " in TaeID:
@@ -518,5 +518,6 @@ for TaeID in TaeIDList:
             CheckAndAppendAnim(TaeID, AnimID)
 
 # write to file
-tree.write(sys.argv[1] + "-out.xml", encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
+os.rename(sys.argv[1], "c0000.xml.bak")
+tree.write(sys.argv[1], encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
 os.system('pause')
