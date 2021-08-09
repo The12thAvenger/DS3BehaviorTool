@@ -518,6 +518,6 @@ for TaeID in TaeIDList:
             CheckAndAppendAnim(TaeID, AnimID)
 
 # write to file
-os.rename(sys.argv[1], "c0000.xml.bak")
+os.rename(sys.argv[1], os.path.basename(sys.argv[1]) + ".bak")
 tree.write(sys.argv[1], encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
 os.system('pause')
