@@ -7,7 +7,12 @@ import os
 from io import StringIO
 import copy
 
-print("The 'Drag and Dropped' File Path is:" ,sys.argv[1])
+if len(sys.argv) > 1:
+    print("The 'Drag and Dropped' File Path is:" ,sys.argv[1])
+else:
+    print("A c0000.xml path was not provided to the executable as an argument.\nTry drag and dropping c0000.xml on the executable")
+    os.system('pause')
+    sys.exit()
 
 # parse behavior xml
 parser = etree.XMLParser(remove_blank_text=True)
