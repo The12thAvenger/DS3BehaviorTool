@@ -229,7 +229,7 @@ def CreateCMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChange
     UserData = GetUserData(HandSM)
 
     #parse, edit and append SMSI
-    hkbStateMachineStateInfo = etree.parse("HavokClasses/hkbStateMachineStateInfo.xml", parser=parser).getroot()
+    hkbStateMachineStateInfo = etree.parse(exeFolder + "HavokClasses/hkbStateMachineStateInfo.xml", parser=parser).getroot()
     hkbStateMachineStateInfo.set("name", "#" + str(NameID))
     hkbStateMachineStateInfo.find('hkparam[@name="generator"]').text = "#" + str(NameID + 1)
     hkbStateMachineStateInfo.find('hkparam[@name="name"]').text = CMSGName
@@ -237,7 +237,7 @@ def CreateCMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChange
     __data__.append(hkbStateMachineStateInfo)
 
     #parse, edit and append CMSG
-    CustomManualSelectorGenerator = etree.parse("HavokClasses/CustomManualSelectorGenerator.xml", parser=parser).getroot()
+    CustomManualSelectorGenerator = etree.parse(exeFolder + "HavokClasses/CustomManualSelectorGenerator.xml", parser=parser).getroot()
     CustomManualSelectorGenerator.set("name", "#" + str(NameID + 1))
     CustomManualSelectorGenerator.find('hkparam[@name="userData"]').text = str(UserData)
     CustomManualSelectorGenerator.find('hkparam[@name="name"]').text = CMSGName + "_CMSG"
@@ -283,7 +283,7 @@ def CreateWACMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChan
     UserData = GetUserData(HandSM)
 
     #parse, edit and append SMSI
-    hkbStateMachineStateInfo = etree.parse("HavokClasses/hkbStateMachineStateInfo.xml", parser=parser).getroot()
+    hkbStateMachineStateInfo = etree.parse(exeFolder + "HavokClasses/hkbStateMachineStateInfo.xml", parser=parser).getroot()
     hkbStateMachineStateInfo.set("name", "#" + str(NameID))
     hkbStateMachineStateInfo.find('hkparam[@name="generator"]').text = "#" + str(NameID + 1)
     hkbStateMachineStateInfo.find('hkparam[@name="name"]').text = CMSGName
@@ -291,7 +291,7 @@ def CreateWACMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChan
     __data__.append(hkbStateMachineStateInfo)
 
     #parse, edit and append hkbManualSelectorGenerator
-    hkbManualSelectorGenerator = etree.parse("HavokClasses/hkbManualSelectorGenerator.xml", parser=parser).getroot()
+    hkbManualSelectorGenerator = etree.parse(exeFolder + "HavokClasses/hkbManualSelectorGenerator.xml", parser=parser).getroot()
     hkbManualSelectorGenerator.set("name", "#" + str(NameID + 1))
     hkbManualSelectorGenerator.find('hkparam[@name="variableBindingSet"]').text = "#" + str(NameID + 2)
     hkbManualSelectorGenerator.find('hkparam[@name="generators"]').text = "\n#" + str(NameID + 3) + "\n#" + str(NameID + 4)
@@ -302,13 +302,13 @@ def CreateWACMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChan
     __data__.append(hkbManualSelectorGenerator)
 
     #parse, edit and append hkbVariableBindingSet
-    hkbVariableBindingSet = etree.parse("HavokClasses/hkbVariableBindingSet.xml", parser=parser).getroot()
+    hkbVariableBindingSet = etree.parse(exeFolder + "HavokClasses/hkbVariableBindingSet.xml", parser=parser).getroot()
     hkbVariableBindingSet.set("name", "#" + str(NameID + 2))
     hkbVariableBindingSet.find('hkparam[@name="bindings"]/hkobject/hkparam[@name="variableIndex"]').text = str(variableIndex)
     __data__.append(hkbVariableBindingSet)
 
     #parse, edit and append CMSG
-    CustomManualSelectorGenerator = etree.parse("HavokClasses/CustomManualSelectorGenerator.xml", parser=parser).getroot()
+    CustomManualSelectorGenerator = etree.parse(exeFolder + "HavokClasses/CustomManualSelectorGenerator.xml", parser=parser).getroot()
     CustomManualSelectorGenerator.set("name", "#" + str(NameID + 3))
     CustomManualSelectorGenerator.find('hkparam[@name="userData"]').text = str(UserData)
     CustomManualSelectorGenerator.find('hkparam[@name="name"]').text = CMSGName + "_CMSG"
@@ -318,7 +318,7 @@ def CreateWACMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChan
     __data__.append(CustomManualSelectorGenerator)
 
     #parse, edit and append NoPoints_CMSG
-    CustomManualSelectorGeneratorNoPoints = etree.parse("HavokClasses/CustomManualSelectorGenerator.xml", parser=parser).getroot()
+    CustomManualSelectorGeneratorNoPoints = etree.parse(exeFolder + "HavokClasses/CustomManualSelectorGenerator.xml", parser=parser).getroot()
     CustomManualSelectorGeneratorNoPoints.set("name", "#" + str(NameID + 4))
     CustomManualSelectorGeneratorNoPoints.find('hkparam[@name="userData"]').text = str(UserData)
     CustomManualSelectorGeneratorNoPoints.find('hkparam[@name="name"]').text = CMSGName + "_NoPoints_CMSG"
@@ -369,7 +369,7 @@ def CheckAndAppendAnim(TaeID, AnimID):
                 print("Animation " + TaeName + "_" + AnimName + " is already registered.")
                 return
 
-    hkbClipGenerator = etree.parse("HavokClasses/hkbClipGenerator.xml", parser=parser).getroot()
+    hkbClipGenerator = etree.parse(exeFolder + "HavokClasses/hkbClipGenerator.xml", parser=parser).getroot()
     hkbClipGenerator.find("hkparam[@name='name']").text = TaeName + "_" + AnimName + ".hkx"
     hkbClipGenerator.find("hkparam[@name='animationName']").text = TaeName + "_" + AnimName
 
