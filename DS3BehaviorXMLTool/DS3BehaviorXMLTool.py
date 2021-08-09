@@ -7,8 +7,13 @@ import os
 from io import StringIO
 import copy
 
+import stat
+import os
+
 if len(sys.argv) > 1:
     print("The 'Drag and Dropped' File Path is:" ,sys.argv[1])
+    st = os.stat(sys.argv[1])
+    os.chmod(sys.argv[1], st.st_mode | stat.S_IWOTH)
 else:
     print("A c0000.xml path was not provided to the executable as an argument.\nTry drag and dropping c0000.xml on the executable")
     os.system('pause')
