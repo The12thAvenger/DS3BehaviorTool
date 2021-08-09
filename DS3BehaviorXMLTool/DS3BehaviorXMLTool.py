@@ -10,6 +10,8 @@ import copy
 import stat
 import os
 
+exeFolder = os.path.dirname(sys.argv[0]) + "\\"
+
 if len(sys.argv) > 1:
     print("The 'Drag and Dropped' File Path is:" ,sys.argv[1])
     st = os.stat(sys.argv[1])
@@ -434,13 +436,13 @@ def CreateVariable(Name):
 
 # read config
 config = configparser.ConfigParser(allow_no_value=True)
-config.read_file(open("config.ini"))
+config.read_file(open(exeFolder + "config.ini"))
 
 #get AnimIDs
 AnimIDType = config["General"]["animidmode"].lower()
 if AnimIDType != "custom":
     AnimDef = configparser.ConfigParser(allow_no_value=True)
-    AnimDef.read_file(open("PresetDefinitions.ini"))
+    AnimDef.read_file(open(exeFolder + "PresetDefinitions.ini"))
     AnimIDList = list(map(int, AnimDef.options(AnimIDType)))
 else:
     AnimIDList = list(map(int, config.options("CustomAnimID")))
@@ -449,7 +451,7 @@ else:
 TaeMode = config["General"]["taemode"].lower()
 if TaeMode != "custom":
     TaeDef = configparser.ConfigParser(allow_no_value=True)
-    TaeDef.read_file(open("TaeIDList.ini"))
+    TaeDef.read_file(open(exeFolder + "TaeIDList.ini"))
     TaeIDList = []
     for TaeID in TaeDef.options(TaeMode):
         if " - " in TaeID:
