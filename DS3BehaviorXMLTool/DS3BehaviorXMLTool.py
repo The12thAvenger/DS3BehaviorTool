@@ -7,10 +7,23 @@ import os
 from io import StringIO
 import copy
 
+import stat
+import os
+
+exeFolder = os.path.dirname(sys.argv[0]) + "\\"
+
+if len(sys.argv) > 1:
+    print("The 'Drag and Dropped' File Path is:" ,sys.argv[1])
+    st = os.stat(sys.argv[1])
+    os.chmod(sys.argv[1], st.st_mode | stat.S_IWOTH)
+else:
+    print("A c0000.xml path was not provided to the executable as an argument.\nTry drag and dropping c0000.xml on the executable")
+    os.system('pause')
+    sys.exit()
+
 # parse behavior xml
-joinedpath = " ".join(sys.argv[1:])
 parser = etree.XMLParser(remove_blank_text=True)
-tree = etree.parse(joinedpath, parser=parser)
+tree = etree.parse(sys.argv[1], parser=parser)
 root = tree.getroot()
 __data__ = root.find("hksection[@name='__data__']")
 
@@ -423,13 +436,13 @@ def CreateVariable(Name):
 
 # read config
 config = configparser.ConfigParser(allow_no_value=True)
-config.read_file(open("config.ini"))
+config.read_file(open(exeFolder + "config.ini"))
 
 #get AnimIDs
 AnimIDType = config["General"]["animidmode"].lower()
 if AnimIDType != "custom":
     AnimDef = configparser.ConfigParser(allow_no_value=True)
-    AnimDef.read_file(open("PresetDefinitions.ini"))
+    AnimDef.read_file(open(exeFolder + "PresetDefinitions.ini"))
     AnimIDList = list(map(int, AnimDef.options(AnimIDType)))
 else:
     AnimIDList = list(map(int, config.options("CustomAnimID")))
@@ -438,7 +451,7 @@ else:
 TaeMode = config["General"]["taemode"].lower()
 if TaeMode != "custom":
     TaeDef = configparser.ConfigParser(allow_no_value=True)
-    TaeDef.read_file(open("TaeIDList.ini"))
+    TaeDef.read_file(open(exeFolder + "TaeIDList.ini"))
     TaeIDList = []
     for TaeID in TaeDef.options(TaeMode):
         if " - " in TaeID:
@@ -505,7 +518,5 @@ for TaeID in TaeIDList:
             CheckAndAppendAnim(TaeID, AnimID)
 
 # write to file
-filename = Path(sys.argv[1]).stem
-folderpath = os.path.dirname(os.path.abspath(sys.argv[1]))
-tree.write(folderpath + "\\" + filename + "-out.xml", encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
+tree.write(sys.argv[1] + "-out.xml", encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
 os.system('pause')
