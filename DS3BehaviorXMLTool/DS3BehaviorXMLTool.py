@@ -6,26 +6,14 @@ import collections
 import os
 from io import StringIO
 import copy
-
+import subprocess
 import stat
-import os
+from shutil import copyfile
 
-exeFolder = os.path.dirname(sys.argv[0])
-
-if len(sys.argv) > 1:
-    print("The 'Drag and Dropped' File Path is:" ,sys.argv[1])
-    st = os.stat(sys.argv[1])
-    os.chmod(sys.argv[1], st.st_mode | stat.S_IWOTH)
-else:
-    print("A c0000.xml path was not provided to the executable as an argument.\nTry drag and dropping c0000.xml on the executable")
-    os.system('pause')
-    sys.exit()
-
-# parse behavior xml
-parser = etree.XMLParser(remove_blank_text=True)
-tree = etree.parse(sys.argv[1], parser=parser)
-root = tree.getroot()
-__data__ = root.find("hksection[@name='__data__']")
+def CallRegisterAnibnd(taeID, taeSubID):
+    return subprocess.run([os.path.join(exeFolder, "Dependencies\AniBNDRegister\AniBNDRegister.exe"), sys.argv[1], taeID, taeSubID])
+    if 1 == 1:
+        pass
 
 # get next free NameID
 def GetNameID():
@@ -434,6 +422,22 @@ def GetVariableParams(Name):
 def CreateVariable(Name):
     return
 
+def divide_chunks(list1, n): 
+  for i in range(0, len(list1), n): 
+    yield list1[i:i + n] 
+
+exeFolder = os.path.dirname(sys.argv[0])
+
+if len(sys.argv) > 1:
+    fileNameArgv1 = os.path.basename(sys.argv[1])
+    print("The 'Drag and Dropped' File Path is:" ,sys.argv[1])
+    st = os.stat(sys.argv[1])
+    os.chmod(sys.argv[1], st.st_mode | stat.S_IWOTH)
+else:
+    print("A c0000.xml or c0000.anibnd.dcx path was not provided to the executable as an argument.\nTry drag and dropping the file on the executable next time.")
+    os.system('pause')
+    sys.exit()
+
 # read config
 config = configparser.ConfigParser(allow_no_value=True)
 config.read_file(open(os.path.join(exeFolder, "config.ini")))
@@ -506,6 +510,28 @@ else:
             except:
                 print("Invalid Tae input: " + TaeID)
 
+#Register AniBND Moveset if AniBND is drag and dropped onto .exe then pause and close program.
+if fileNameArgv1 == "c0000.anibnd.dcx":
+    commaSeparatedAnimList = ""
+    for taeSubID in AnimIDList:
+        commaSeparatedAnimList += str(taeSubID) + ","
+    else:
+        commaSeparatedAnimList = commaSeparatedAnimList[:-1]
+
+    commaSeparatedTaeIDList = ""
+    for taeIDLoop in TaeIDList:
+        commaSeparatedTaeIDList += str(taeIDLoop) + ","
+    else:
+        commaSeparatedTaeIDList = commaSeparatedTaeIDList[:-1]
+        CallRegisterAnibnd(taeID=commaSeparatedTaeIDList, taeSubID=commaSeparatedAnimList)
+
+    sys.exit()
+
+# parse behavior xml
+parser = etree.XMLParser(remove_blank_text=True)
+tree = etree.parse(sys.argv[1], parser=parser)
+root = tree.getroot()
+__data__ = root.find("hksection[@name='__data__']")    
 
 #append hkbClipGenerators and add them to CustomManualSelectorGenerators
 for TaeID in TaeIDList:
@@ -518,6 +544,11 @@ for TaeID in TaeIDList:
             CheckAndAppendAnim(TaeID, AnimID)
 
 # write to file
-os.rename(sys.argv[1], os.path.basename(sys.argv[1]) + ".bak")
+try:
+    os.remove(sys.argv[1] + ".bak")
+except:
+    pass
+
+os.rename(sys.argv[1], sys.argv[1] + ".bak")
 tree.write(sys.argv[1], encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
 os.system('pause')
