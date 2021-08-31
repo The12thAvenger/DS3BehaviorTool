@@ -11,3 +11,6 @@ Simply drag and drop c0000.xml onto the exe to use.
 Customizable config and presets for mass editing, please read config.ini before use.  
 Supports registering to any CustomManualSelectorGenerator  
 Supports creation of CMSGs for regular attacks and hkManualSelectorGenerators for weapon arts.  
+
+Credits:
+NamelessHoodie - Drag and Drop, AniBNDRegister
