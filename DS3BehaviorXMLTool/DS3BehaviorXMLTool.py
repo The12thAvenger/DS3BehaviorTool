@@ -1,6 +1,7 @@
+import shutil
 import sys
 from lxml import etree
-from pathlib import Path
+from pathlib import Path, PosixPath
 import configparser
 import collections
 import os
@@ -12,8 +13,12 @@ from shutil import copyfile
 
 def CallRegisterAnibnd(taeID, taeSubID):
     return subprocess.run([os.path.join(exeFolder, "Dependencies\AniBNDRegister\AniBNDRegister.exe"), sys.argv[1], taeID, taeSubID])
-    if 1 == 1:
-        pass
+
+def CallYabber(filePath):
+    return subprocess.run([os.path.join(exeFolder, "Dependencies\Yabber\Yabber.exe"), filePath])
+
+def CallHkxPackSoulsDs3(filePath):
+    return subprocess.run([os.path.join(exeFolder, "Dependencies\hkxpack-souls\hkxpackds3.exe"), filePath])
 
 # get next free NameID
 def GetNameID():
@@ -430,11 +435,9 @@ exeFolder = os.path.dirname(sys.argv[0])
 
 if len(sys.argv) > 1:
     fileNameArgv1 = os.path.basename(sys.argv[1])
-    print("The 'Drag and Dropped' File Path is:" ,sys.argv[1])
-    st = os.stat(sys.argv[1])
-    os.chmod(sys.argv[1], st.st_mode | stat.S_IWOTH)
+    print("The 'Drag and Dropped' File Path is:" ,sys.argv[1], "\n")
 else:
-    print("A c0000.xml or c0000.anibnd.dcx path was not provided to the executable as an argument.\nTry drag and dropping the file on the executable next time.")
+    print("A c0000.behbnd.dcx or c0000.anibnd.dcx path was not provided to the executable as an argument.\nTry drag and dropping the file on the executable next time.")
     os.system('pause')
     sys.exit()
 
@@ -524,28 +527,65 @@ if fileNameArgv1 == "c0000.anibnd.dcx":
     else:
         commaSeparatedTaeIDList = commaSeparatedTaeIDList[:-1]
         CallRegisterAnibnd(taeID=commaSeparatedTaeIDList, taeSubID=commaSeparatedAnimList)
+elif fileNameArgv1 == "c0000.behbnd.dcx":
+    # Create Temporary Directory to unpack the behbnd into, Deletes the directory if it already exists.
+    workFolderPath = os.path.join(exeFolder, "WorkFolder")
+    if os.path.isdir(workFolderPath):
+        shutil.rmtree(workFolderPath)
+    os.mkdir(workFolderPath)
 
-    sys.exit()
+    # Copy drag and dropped behbnd to work folder
+    shutil.copy(sys.argv[1], workFolderPath)
+    workFolderBehBndPath = os.path.join(workFolderPath, "c0000.behbnd.dcx")
 
-# parse behavior xml
-parser = etree.XMLParser(remove_blank_text=True)
-tree = etree.parse(sys.argv[1], parser=parser)
-root = tree.getroot()
-__data__ = root.find("hksection[@name='__data__']")    
+    # Calling yabber onto c0000.behbnd.dcx inside work folder
+    CallYabber(workFolderBehBndPath)
+    workFolderBehBndUnpackedPath = os.path.join(workFolderPath, "c0000-behbnd-dcx")
 
-#append hkbClipGenerators and add them to CustomManualSelectorGenerators
-for TaeID in TaeIDList:
-    if int(TaeID) > 999:
-        print("Tae ID " + str(TaeID) + "is too large.")
-    elif int(TaeID) < 0:
-        print("Tae ID " + str(TaeID) + "is too small.")
-    else:
-        for AnimID in AnimIDList:
-            CheckAndAppendAnim(TaeID, AnimID)
+    # Calling HkxPackSouls onto c0000.hkx
+    workFolderc0000hkxPath = os.path.join(workFolderBehBndUnpackedPath ,"Action\c0000\Export\Behaviors\c0000.hkx")
+    CallHkxPackSoulsDs3(workFolderc0000hkxPath)
+    workFolderc0000xmlPath = os.path.join(workFolderBehBndUnpackedPath ,"Action\c0000\Export\Behaviors\c0000.xml")
 
-# write to file
-if os.path.isfile(sys.argv[1] + ".bak"):
-    os.remove(sys.argv[1] + ".bak")
-os.rename(sys.argv[1], sys.argv[1] + ".bak")
-tree.write(sys.argv[1], encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
-os.system('pause')
+    # Print Separator
+    print("----------------------------------------------------------")
+
+    # parse behavior xml
+    parser = etree.XMLParser(remove_blank_text=True)
+    tree = etree.parse(workFolderc0000xmlPath, parser=parser)
+    root = tree.getroot()
+    __data__ = root.find("hksection[@name='__data__']")    
+
+    #append hkbClipGenerators and add them to CustomManualSelectorGenerators
+    for TaeID in TaeIDList:
+        if int(TaeID) > 999:
+            print("Tae ID " + str(TaeID) + "is too large.")
+        elif int(TaeID) < 0:
+            print("Tae ID " + str(TaeID) + "is too small.")
+        else:
+            for AnimID in AnimIDList:
+                CheckAndAppendAnim(TaeID, AnimID)
+
+    # write to c0000.xml in work folder
+    tree.write(workFolderc0000xmlPath, encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
+
+        # Print Separator
+    print("----------------------------------------------------------\n")
+    # Calling HkxPackSouls onto c0000.xml to get updated c0000.hkx
+    CallHkxPackSoulsDs3(workFolderc0000xmlPath)
+
+    # Calling Yabber onto unpacked folder to get updated c0000.behbnd.dcx
+    CallYabber(workFolderBehBndUnpackedPath)
+
+    # Rename Drag and Dropped file to c0000.behbnd.dcx.bak
+    if os.path.isfile(sys.argv[1] + ".bak"):
+        os.remove(sys.argv[1] + ".bak")
+    os.rename(sys.argv[1], sys.argv[1] + ".bak")
+
+    # Copy updated file back into the source folder
+    shutil.copy(workFolderBehBndPath, os.path.dirname(sys.argv[1]))
+
+    # Remove Work Directory and all files inside of it.
+    shutil.rmtree(workFolderPath)
+
+    os.system('pause')
