@@ -12,5 +12,5 @@ Customizable config and presets for mass editing, please read config.ini before 
 Supports registering to any CustomManualSelectorGenerator  
 Supports creation of CMSGs for regular attacks and hkManualSelectorGenerators for weapon arts.  
 
-Credits:
+Credits:  
 NamelessHoodie - Drag and Drop, AniBNDRegister
