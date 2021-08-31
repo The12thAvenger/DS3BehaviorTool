@@ -45,41 +45,25 @@
   ('DS3BehaviorXMLTool',
    'C:\\Users\\sweet\\Documents\\GitHub\\DS3BehaviorXMLTool\\DS3BehaviorXMLTool\\DS3BehaviorXMLTool.py',
    'PYSOURCE'),
-  ('api-ms-win-crt-string-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-string-l1-1-0.dll',
-   'BINARY'),
   ('api-ms-win-crt-locale-l1-1-0.dll',
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-locale-l1-1-0.dll',
    'BINARY'),
-  ('api-ms-win-core-debug-l1-1-0.dll',
+  ('python39.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-debug-l1-1-0.dll',
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_3.9.1776.0_x64__qbz5n2kfra8p0\\python39.dll',
    'BINARY'),
-  ('api-ms-win-core-processthreads-l1-1-0.dll',
+  ('api-ms-win-core-util-l1-1-0.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-processthreads-l1-1-0.dll',
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-util-l1-1-0.dll',
    'BINARY'),
-  ('api-ms-win-core-sysinfo-l1-1-0.dll',
+  ('api-ms-win-crt-string-l1-1-0.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-sysinfo-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-profile-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-profile-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-crt-heap-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-heap-l1-1-0.dll',
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-string-l1-1-0.dll',
    'BINARY'),
   ('api-ms-win-crt-convert-l1-1-0.dll',
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-convert-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-processthreads-l1-1-1.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-processthreads-l1-1-1.dll',
    'BINARY'),
   ('api-ms-win-core-interlocked-l1-1-0.dll',
    'C:\\Program '
@@ -89,17 +73,29 @@
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-environment-l1-1-0.dll',
    'BINARY'),
-  ('api-ms-win-core-errorhandling-l1-1-0.dll',
+  ('api-ms-win-crt-stdio-l1-1-0.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-errorhandling-l1-1-0.dll',
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-stdio-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-rtlsupport-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-rtlsupport-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-processthreads-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-processthreads-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-heap-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-heap-l1-1-0.dll',
    'BINARY'),
   ('api-ms-win-crt-runtime-l1-1-0.dll',
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-runtime-l1-1-0.dll',
    'BINARY'),
-  ('api-ms-win-core-util-l1-1-0.dll',
+  ('api-ms-win-core-profile-l1-1-0.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-util-l1-1-0.dll',
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-profile-l1-1-0.dll',
    'BINARY'),
   ('api-ms-win-core-synch-l1-1-0.dll',
    'C:\\Program '
@@ -109,32 +105,24 @@
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-math-l1-1-0.dll',
    'BINARY'),
-  ('api-ms-win-crt-stdio-l1-1-0.dll',
+  ('api-ms-win-core-debug-l1-1-0.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-stdio-l1-1-0.dll',
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-debug-l1-1-0.dll',
    'BINARY'),
-  ('api-ms-win-core-rtlsupport-l1-1-0.dll',
+  ('api-ms-win-core-processthreads-l1-1-1.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-rtlsupport-l1-1-0.dll',
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-processthreads-l1-1-1.dll',
    'BINARY'),
-  ('python39.dll',
+  ('api-ms-win-core-sysinfo-l1-1-0.dll',
    'C:\\Program '
-   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_3.9.1776.0_x64__qbz5n2kfra8p0\\python39.dll',
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-sysinfo-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-errorhandling-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-errorhandling-l1-1-0.dll',
    'BINARY'),
   ('ucrtbase.dll',
    'C:\\Program Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\ucrtbase.dll',
-   'BINARY'),
-  ('api-ms-win-crt-conio-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-conio-l1-1-0.dll',
-   'BINARY'),
-  ('VCRUNTIME140.dll',
-   'C:\\Program '
-   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_3.9.1776.0_x64__qbz5n2kfra8p0\\VCRUNTIME140.dll',
-   'BINARY'),
-  ('api-ms-win-crt-process-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-process-l1-1-0.dll',
    'BINARY'),
   ('api-ms-win-crt-filesystem-l1-1-0.dll',
    'C:\\Program '
@@ -144,65 +132,77 @@
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-time-l1-1-0.dll',
    'BINARY'),
-  ('api-ms-win-core-file-l1-2-0.dll',
+  ('VCRUNTIME140.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-file-l1-2-0.dll',
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_3.9.1776.0_x64__qbz5n2kfra8p0\\VCRUNTIME140.dll',
    'BINARY'),
-  ('api-ms-win-core-string-l1-1-0.dll',
+  ('api-ms-win-crt-process-l1-1-0.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-string-l1-1-0.dll',
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-process-l1-1-0.dll',
    'BINARY'),
-  ('api-ms-win-core-console-l1-1-0.dll',
+  ('api-ms-win-crt-conio-l1-1-0.dll',
    'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-console-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-synch-l1-2-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-synch-l1-2-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-datetime-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-datetime-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-file-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-file-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-libraryloader-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-libraryloader-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-timezone-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-timezone-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-heap-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-heap-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-memory-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-memory-l1-1-0.dll',
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-crt-conio-l1-1-0.dll',
    'BINARY'),
   ('api-ms-win-core-processenvironment-l1-1-0.dll',
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-processenvironment-l1-1-0.dll',
    'BINARY'),
+  ('api-ms-win-core-file-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-file-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-heap-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-heap-l1-1-0.dll',
+   'BINARY'),
   ('api-ms-win-core-namedpipe-l1-1-0.dll',
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-namedpipe-l1-1-0.dll',
-   'BINARY'),
-  ('api-ms-win-core-handle-l1-1-0.dll',
-   'C:\\Program '
-   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-handle-l1-1-0.dll',
    'BINARY'),
   ('api-ms-win-core-file-l2-1-0.dll',
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-file-l2-1-0.dll',
    'BINARY'),
+  ('api-ms-win-core-console-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-console-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-timezone-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-timezone-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-memory-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-memory-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-datetime-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-datetime-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-synch-l1-2-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-synch-l1-2-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-file-l1-2-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-file-l1-2-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-handle-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-handle-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-libraryloader-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-libraryloader-l1-1-0.dll',
+   'BINARY'),
   ('api-ms-win-core-localization-l1-2-0.dll',
    'C:\\Program '
    'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-localization-l1-2-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-string-l1-1-0.dll',
+   'C:\\Program '
+   'Files\\AdoptOpenJDK\\jdk-11.0.11.9-hotspot\\bin\\api-ms-win-core-string-l1-1-0.dll',
    'BINARY'),
   ('_lzma',
    'C:\\Program '
@@ -266,11 +266,14 @@
   ('lxml._elementpath',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\_elementpath.cp39-win_amd64.pyd',
    'EXTENSION'),
+  ('lxml.objectify',
+   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\objectify.cp39-win_amd64.pyd',
+   'EXTENSION'),
   ('lxml.html.diff',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\html\\diff.cp39-win_amd64.pyd',
    'EXTENSION'),
-  ('lxml.objectify',
-   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\objectify.cp39-win_amd64.pyd',
+  ('lxml.html.clean',
+   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\html\\clean.cp39-win_amd64.pyd',
    'EXTENSION'),
   ('lxml.sax',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\sax.cp39-win_amd64.pyd',
@@ -278,16 +281,13 @@
   ('lxml.builder',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\builder.cp39-win_amd64.pyd',
    'EXTENSION'),
-  ('lxml.html.clean',
-   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\html\\clean.cp39-win_amd64.pyd',
-   'EXTENSION'),
-  ('libssl-1_1.dll',
-   'C:\\Program '
-   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_3.9.1776.0_x64__qbz5n2kfra8p0\\DLLs\\libssl-1_1.dll',
-   'BINARY'),
   ('libcrypto-1_1.dll',
    'C:\\Program '
    'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_3.9.1776.0_x64__qbz5n2kfra8p0\\DLLs\\libcrypto-1_1.dll',
+   'BINARY'),
+  ('libssl-1_1.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_3.9.1776.0_x64__qbz5n2kfra8p0\\DLLs\\libssl-1_1.dll',
    'BINARY'),
   ('libffi-7.dll',
    'C:\\Program '
@@ -300,11 +300,8 @@
   ('base_library.zip',
    'C:\\Users\\sweet\\Documents\\GitHub\\DS3BehaviorXMLTool\\DS3BehaviorXMLTool\\build\\DS3BehaviorXMLTool\\base_library.zip',
    'DATA'),
-  ('lxml\\isoschematron\\resources\\xsl\\RNG2Schtrn.xsl',
-   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\RNG2Schtrn.xsl',
-   'DATA'),
-  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_abstract_expand.xsl',
-   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_abstract_expand.xsl',
+  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_skeleton_for_xslt1.xsl',
+   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_skeleton_for_xslt1.xsl',
    'DATA'),
   ('lxml\\isoschematron\\resources\\rng\\iso-schematron.rng',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\rng\\iso-schematron.rng',
@@ -312,8 +309,14 @@
   ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_svrl_for_xslt1.xsl',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_svrl_for_xslt1.xsl',
    'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\XSD2Schtrn.xsl',
+   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\XSD2Schtrn.xsl',
+   'DATA'),
   ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\readme.txt',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\readme.txt',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_abstract_expand.xsl',
+   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_abstract_expand.xsl',
    'DATA'),
   ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_message.xsl',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_message.xsl',
@@ -321,11 +324,8 @@
   ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_dsdl_include.xsl',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_dsdl_include.xsl',
    'DATA'),
-  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_skeleton_for_xslt1.xsl',
-   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_skeleton_for_xslt1.xsl',
-   'DATA'),
-  ('lxml\\isoschematron\\resources\\xsl\\XSD2Schtrn.xsl',
-   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\XSD2Schtrn.xsl',
+  ('lxml\\isoschematron\\resources\\xsl\\RNG2Schtrn.xsl',
+   'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\lxml\\isoschematron\\resources\\xsl\\RNG2Schtrn.xsl',
    'DATA'),
   ('DS3BehaviorXMLTool.exe.manifest',
    'C:\\Users\\sweet\\Documents\\GitHub\\DS3BehaviorXMLTool\\DS3BehaviorXMLTool\\build\\DS3BehaviorXMLTool\\DS3BehaviorXMLTool.exe.manifest',
@@ -336,7 +336,7 @@
  [],
  False,
  False,
- 1628650083,
+ 1630376168,
  [('run.exe',
    'C:\\Users\\sweet\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\run.exe',
    'EXECUTABLE')])

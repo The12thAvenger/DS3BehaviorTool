@@ -544,11 +544,8 @@ for TaeID in TaeIDList:
             CheckAndAppendAnim(TaeID, AnimID)
 
 # write to file
-try:
+if os.path.isfile(sys.argv[1] + ".bak"):
     os.remove(sys.argv[1] + ".bak")
-except:
-    pass
-
 os.rename(sys.argv[1], sys.argv[1] + ".bak")
 tree.write(sys.argv[1], encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
 os.system('pause')
