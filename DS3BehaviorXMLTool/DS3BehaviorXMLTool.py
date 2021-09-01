@@ -10,6 +10,7 @@ import copy
 import subprocess
 import stat
 from shutil import copyfile
+import copy
 
 def CallRegisterAnibnd(taeID, taeSubID):
     return subprocess.run([os.path.join(exeFolder, "Dependencies\AniBNDRegister\AniBNDRegister.exe"), sys.argv[1], taeID, taeSubID])
@@ -362,13 +363,23 @@ def CheckAndAppendAnim(TaeID, AnimID):
                 print("Animation " + TaeName + "_" + AnimName + " is already registered.")
                 return
 
-    hkbClipGenerator = etree.parse(os.path.join(exeFolder, "HavokClasses/hkbClipGenerator.xml"), parser=parser).getroot()
-    hkbClipGenerator.find("hkparam[@name='name']").text = TaeName + "_" + AnimName + ".hkx"
-    hkbClipGenerator.find("hkparam[@name='animationName']").text = TaeName + "_" + AnimName
-
     while CustomManualSelectorGeneratorFound == False:
         for CustomManualSelectorGenerator in __data__.findall('hkobject[@class="CustomManualSelectorGenerator"]'):
             if CustomManualSelectorGenerator.find('hkparam[@name="animId"]').text == str(AnimID):
+                try:
+                    clipGenID = CustomManualSelectorGenerator.find('hkparam[@name="generators"]').text.split()[0]
+                    for clipGen in __data__.findall('hkobject[@class="hkbClipGenerator"]'):
+                        if clipGen.get("name") == clipGenID:
+                            hkbClipGenerator = copy.deepcopy(clipGen)
+                            break
+                    else:
+                        hkbClipGenerator = etree.parse(os.path.join(exeFolder, "HavokClasses/hkbClipGenerator.xml"), parser=parser).getroot()
+                except:
+                    hkbClipGenerator = etree.parse(os.path.join(exeFolder, "HavokClasses/hkbClipGenerator.xml"), parser=parser).getroot()
+                    
+                hkbClipGenerator.find("hkparam[@name='name']").text = TaeName + "_" + AnimName + ".hkx"
+                hkbClipGenerator.find("hkparam[@name='animationName']").text = TaeName + "_" + AnimName
+                
                 Name = "#" + str(GetNameID())
                 hkbClipGenerator.set("name", Name)
                 generators = CustomManualSelectorGenerator.find('hkparam[@name="generators"]')
