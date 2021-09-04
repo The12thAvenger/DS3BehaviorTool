@@ -346,6 +346,68 @@ def CreateWACMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChan
             TransitionInfoArray.find("hkparam[@name='transitions']").append(newTransition)
             break
 
+def CreateEnemyCMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChangedTransitionEffect):
+    NameID = GetNameID()
+    StateID = GetStateID(HandSM)
+    UserData = GetUserData(HandSM)
+
+    #parse, edit and append SMSI
+    hkbStateMachineStateInfo = etree.parse(os.path.join(exeFolder, "HavokClasses/hkbStateMachineStateInfo.xml"), parser=parser).getroot()
+    hkbStateMachineStateInfo.set("name", "#" + str(NameID))
+    hkbStateMachineStateInfo.find('hkparam[@name="generator"]').text = "#" + str(NameID + 1)
+    hkbStateMachineStateInfo.find('hkparam[@name="name"]').text = CMSGName
+    hkbStateMachineStateInfo.find('hkparam[@name="stateId"]').text = str(StateID)
+    __data__.append(hkbStateMachineStateInfo)
+
+    #parse, edit and append CMSG
+    CustomManualSelectorGenerator = etree.parse(os.path.join(exeFolder, "HavokClasses/CustomManualSelectorGenerator.xml"), parser=parser).getroot()
+    CustomManualSelectorGenerator.set("name", "#" + str(NameID + 1))
+    CustomManualSelectorGenerator.find('hkparam[@name="userData"]').text = str(UserData)
+    CustomManualSelectorGenerator.find('hkparam[@name="name"]').text = CMSGName + "_CMSG"
+    CustomManualSelectorGenerator.find('hkparam[@name="offsetType"]').text = offsetType
+    CustomManualSelectorGenerator.find('hkparam[@name="animId"]').text = str(AnimID)
+    CustomManualSelectorGenerator.find('hkparam[@name="generatorChangedTransitionEffect"]').text = generatorChangedTransitionEffect
+    __data__.append(CustomManualSelectorGenerator)
+
+    #add event and transition entry
+    EventID = GetEventID()
+
+    eventNames = __data__.find("hkobject[@class='hkbBehaviorGraphStringData']/hkparam[@name='eventNames']")
+    etree.SubElement(eventNames, 'hkcstring').text = "W_" + CMSGName
+    etree.SubElement(eventNames, 'hkcstring').text = "W_Event" + str(AnimID)
+    eventNames.set("numelements", str(int(eventNames.get("numelements")) + 2))
+
+    eventInfos = __data__.find("hkobject[@class='hkbBehaviorGraphData']/hkparam[@name='eventInfos']")
+    eventInfoObject = etree.SubElement(eventInfos, "hkobject")
+    etree.SubElement(eventInfoObject, "hkparam", name="flags").text = "0"
+    etree.SubElement(eventInfoObject, "hkparam", name="flags").text = "0"
+    eventInfos.set("numelements", str(int(eventInfos.get("numelements")) + 2))
+
+    for SM in __data__.findall("hkobject[@class='hkbStateMachine']"):
+        if SM.find("hkparam[@name='name']").text == HandSM:
+            SMstates = SM.find("hkparam[@name='states']")
+            SMstates.text += "#" + str(NameID) + "\n"
+            SMstates.set("numelements", str(int(SMstates.get("numelements"))+1))
+            transitions = SM.find("hkparam[@name='wildcardTransitions']").text
+            break
+
+    for TransitionInfoArray in __data__.findall('hkobject[@class="hkbStateMachineTransitionInfoArray"]'):
+        if TransitionInfoArray.get("name") == transitions:
+            transitionParam = TransitionInfoArray.find("hkparam[@name='transitions']")
+            transitionParam.set("numelements", str(int(transitionParam.get("numelements"))+2))
+            newTransition = copy.deepcopy(transitionParam.find("hkobject"))
+            newTransition.find('hkparam[@name="eventId"]').text = str(EventID)
+            newTransition.find('hkparam[@name="toStateId"]').text = str(StateID)
+            newTransition.find('hkparam[@name="transition"]').text = transition
+            TransitionInfoArray.find("hkparam[@name='transitions']").append(newTransition)
+            
+            newEventTransition = copy.deepcopy(transitionParam.find("hkobject"))
+            newEventTransition.find('hkparam[@name="eventId"]').text = str(EventID + 1)
+            newEventTransition.find('hkparam[@name="toStateId"]').text = str(StateID)
+            newEventTransition.find('hkparam[@name="transition"]').text = transition
+            TransitionInfoArray.find("hkparam[@name='transitions']").append(newEventTransition)
+            break
+
 #check whether animation has already been registered, otherwise register
 def CheckAndAppendAnim(TaeID, AnimID):
     TaeName = "a" + str(TaeID).zfill(3)
@@ -543,9 +605,9 @@ if fileNameArgv1 == "c9997.xml":
     
     for AnimID in AnimIDList:
             CMSGName = "Attack" + str(AnimID)
-            CreateCMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChangedTransitionEffect)
+            CreateEnemyCMSG(AnimID, CMSGName, HandSM, offsetType, transition, generatorChangedTransitionEffect)
             for TaeID in TaeIDList:
-                CheckAndAppendAnim(TaeID, AnimID)
+                CheckAndAppendAnim(TaeID, AnimID)   
 else:            
 
     #append hkbClipGenerators and add them to CustomManualSelectorGenerators
