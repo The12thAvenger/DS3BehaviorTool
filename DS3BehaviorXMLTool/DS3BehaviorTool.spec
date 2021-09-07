@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['DS3BehaviorXMLTool.py'],
-             pathex=['C:\\Users\\the12\\Desktop\\DS3BehaviorXMLTool'],
+             pathex=['C:\\Users\\the12\\Desktop\\DS3BehaviorTool'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -24,7 +24,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='DS3BehaviorXMLTool',
+          name='DS3BehaviorTool',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
