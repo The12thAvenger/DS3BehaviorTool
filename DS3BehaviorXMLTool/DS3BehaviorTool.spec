@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['DS3BehaviorXMLTool.py'],
+a = Analysis(['DS3BehaviorTool.py'],
              pathex=['C:\\Users\\the12\\Desktop\\DS3BehaviorTool'],
              binaries=[],
              datas=[],

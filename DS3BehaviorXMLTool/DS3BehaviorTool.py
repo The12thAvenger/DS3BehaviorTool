@@ -123,7 +123,7 @@ def GetLayerGenParams():
             print("Invalid input")
             continue
         for ScriptGen in __data__.findall('hkobject[@class="hkbScriptGenerator"]'):
-            if LayerGenParentName.lower() in [ScriptGen.find('hkparam[@name="name"]').text.lower(), RemoveSuffix(ScriptGen.find('hkparam[@name="name"]').text.lower(), "_Script"), RemoveSuffix(ScriptGen.find('hkparam[@name="name"]').text.lower(), " Script")]:
+            if LayerGenParentName.lower() in [ScriptGen.find('hkparam[@name="name"]').text.lower(), RemoveSuffix(ScriptGen.find('hkparam[@name="name"]').text, "_Script").lower(), RemoveSuffix(ScriptGen.find('hkparam[@name="name"]').text, " Script").lower()]:
                 ScriptGenerator = ScriptGen
                 isValid = True
                 break
@@ -136,10 +136,6 @@ def GetLayerGenParams():
         try:
             LayerGenStartAnimID = int(LayerGenStartAnimIDStr)
         except:
-            print("Invalid input")
-            continue
-
-        if LayerGenStartAnimID == "":
             print("Invalid input")
             continue
 
@@ -720,7 +716,7 @@ elif fileNameArgv1 == "c0000.behbnd.dcx":
     root = tree.getroot()
     __data__ = root.find("hksection[@name='__data__']")  
 
-    SpecialMode = config["General"]["specialmode"].lower()  
+    SpecialMode = config["General"]["specialmode"].lower() 
 
     if SpecialMode == "none":
         #append hkbClipGenerators and add them to CustomManualSelectorGenerators
