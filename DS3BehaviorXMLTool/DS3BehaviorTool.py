@@ -106,6 +106,127 @@ def GetUserData(StateMachineName):
         else:
             return UserData
 
+def GetLayerGenParams():
+    isValid = False
+    while isValid != True:
+        LayerGenName = RemoveSuffix(str(input('Enter LayerGenerator name: ')), "_LayerGenerator")
+        if LayerGenName == "":
+            print("Invalid input")
+            continue
+        else:
+            isValid = True
+
+    isValid = False
+    while isValid != True:
+        LayerGenParentName = str(input('Enter parent ScriptGenerator (e.g. AttackRight_Script): '))
+        if LayerGenParentName == "":
+            print("Invalid input")
+            continue
+        for ScriptGen in __data__.findall('hkobject[@class="hkbScriptGenerator"]'):
+            if LayerGenParentName.lower() in [ScriptGen.find('hkparam[@name="name"]').text.lower(), RemoveSuffix(ScriptGen.find('hkparam[@name="name"]').text.lower(), "_Script"), RemoveSuffix(ScriptGen.find('hkparam[@name="name"]').text.lower(), " Script")]:
+                ScriptGenerator = ScriptGen
+                isValid = True
+                break
+        else:
+            print("No hkbScriptGenerator with name " + LayerGenParentName + " found")
+
+    isValid = False
+    while isValid != True:
+        LayerGenStartAnimIDStr = str(input('Enter starting AnimID for blend anims: '))
+        try:
+            LayerGenStartAnimID = int(LayerGenStartAnimIDStr)
+        except:
+            print("Invalid input")
+            continue
+
+        if LayerGenStartAnimID == "":
+            print("Invalid input")
+            continue
+
+        newAnimIDList = [LayerGenStartAnimID, LayerGenStartAnimID + 10, LayerGenStartAnimID + 20, LayerGenStartAnimID + 50, LayerGenStartAnimID + 60, LayerGenStartAnimID + 70]
+        for AnimID in __data__.findall('hkobject[@class="CustomManualSelectorGenerator"]/hkparam[@name=animId]'):
+            if int(AnimID.text) in newAnimIDList:
+                print("Anim ID " + LayerGenStartAnimID + " already exists")
+                break
+        else:
+            isValid = True
+
+    isValid = False
+    while isValid != True:
+        LayerGenVarPrefix = str(input('Enter variable prefix (variables will be named [prefix]_a00/[prefix]_a02/[prefix]_a03): '))
+        if LayerGenVarPrefix == "":
+            print("Invalid input")
+            continue
+        else:
+            isValid = True
+
+    CreateLayerGen(LayerGenName, ScriptGenerator, LayerGenStartAnimID, LayerGenVarPrefix)
+
+
+def CreateLayerGen(Name, ScriptGenerator, StartAnimID, VarPrefix):
+    ScriptGenName = RemoveSuffix(ScriptGenerator.find('hkparam[@name="name"]').text, "_Script")
+    ScriptGenName = RemoveSuffix(ScriptGenName, " Script")
+    ScriptGenerator.find('hkparam[@name="onPreUpdateScript"]').text = ScriptGenName + "_Update()"
+    ScriptGenChildID = ScriptGenerator.find('hkparam[@name="child"]').text
+
+    LayerGen = copy.deepcopy(__data__.find('hkobject[@class="hkbLayerGenerator"]'))
+    NameID = GetNameID()
+    LayerGen.set("name", "#" + str(NameID))
+    __data__.append(LayerGen)
+
+    LayerGen.find('hkparam[@name="name"]').text = Name + "_LayerGenerator"
+
+    for i in range(4):
+        BlendTemplate = etree.parse("HavokClasses/BlendTemplate.xml", parser=parser)
+        NameID = GetNameID()
+        if i == 0:
+            SMLayer = BlendTemplate.find('hkobject[@class="hkbLayer"]')
+            SMLayer.find('hkparam[@name="variableBindingSet"]').text = "null"
+            SMLayer.find('hkparam[@name="boneWeights"]').text = "null"
+            SMLayer.find('hkparam[@name="generator"]').text = ScriptGenChildID
+            __data__.append(BlendTemplate.find('hkobject[@class="hkbLayer"]'))
+        else:
+            for hkobject in BlendTemplate.findall("hkobject"):
+                for ref in BlendTemplate.findall('hkobject/hkparam'):
+                    if ref.text == hkobject.get("name"):
+                        ref.text = "#" + str(NameID)
+
+                hkobject.set("name", "#" + str(NameID))
+                NameID += 1
+
+            if i == 1:
+                HoldStyle = "_a00"
+            elif i == 2:
+                HoldStyle = "_a02"
+                StartAnimID += 10
+            elif i == 3:
+                HoldStyle = "_a03"
+                StartAnimID += 20
+
+            BlendTemplate.find('hkobject[@class="hkbBlenderGenerator"]/hkparam[@name="name"]').text = Name + HoldStyle + "_Blend"
+
+            for CMSG in BlendTemplate.findall('hkobject[@class="CustomManualSelectorGenerator"]'):
+                if "Idle" in CMSG.find('hkparam[@name="name"]').text:
+                    CMSG.find('hkparam[@name="name"]').text = Name + "Idle" + HoldStyle + "_CMSG"
+                    CMSG.find('hkparam[@name="animId"]').text = str(StartAnimID)
+                elif "Active" in CMSG.find('hkparam[@name="name"]').text:
+                    CMSG.find('hkparam[@name="name"]').text = Name + "Active" + HoldStyle + "_CMSG"
+                    CMSG.find('hkparam[@name="animId"]').text = str(StartAnimID+50)
+
+                for hkbClipGenerator in BlendTemplate.findall('hkobject[@class="hkbClipGenerator"]'):
+                    if hkbClipGenerator.get("name") in CMSG.find('hkparam[name="generators"]').text:
+                        AnimID = CMSG.find('hkparam[@name="animId"]').text
+                        hkbClipGenerator.find('hkparam[name="name"]').text = "a000_" + AnimID + "_hkx_AutoSet_00"
+                        hkbClipGenerator.find('hkparam[name="animationName"]').text = "a000_" + AnimID
+
+            VarName = VarPrefix + HoldStyle
+            CreateVariable(VarName, "0", "1065353216", "VARIABLE_TYPE_REAL", "0")
+            variableIndex = int(__data__.find('hkobject[@class="hkbBehaviorGraphStringData"]/hkparam[@name=variableNames]').get("numelements")) - 1
+            BlendTemplate.find('hkobject[class="hkbVariableBindingSet"]/hkparam[@name="bindings"]/hkobject/hkparam[@name="variableIndex"]').text = variableIndex
+
+            __data__.append(BlendTemplate.getchildren())
+
+
 def GetCMSGParams(AnimID):
     isValid = False
     while isValid != True:
@@ -435,12 +556,40 @@ def GetVariableParams(Name):
         else:
             print("Invalid input")
 
-def CreateVariable(Name):
-    return
+def CreateVariable(Name, Min, Max, Type, InitVal):
+    variableNames = __data__.find('hkobject[@class="hkbBehaviorGraphStringData"]/hkparam[@name=variableNames]')
+    etree.SubElement(variableNames, "hkcstring").text = Name
+    variableNames.set("numelements", str(int(variableNames.get("numelements"))+1))
+
+    variableBounds = __data__.find('hkobject[@class="hkbBehaviorGraphData"]/hkparam[@name=variableBounds]')
+    newBounds = copy.deepcopy(variableBounds.find('hkobject'))
+    newBounds.find('hkparam[@name="min"]/hkobject/hkparam').text = Min
+    newBounds.find('hkparam[@name="max"]/hkobject/hkparam').text = Max
+    variableBounds.append(newBounds)
+    variableBounds.set("numelements", str(int(variableBounds.get("numelements"))+1))
+
+    variableInfos = __data__.find('hkobject[@class="hkbBehaviorGraphData"]/hkparam[@name=variableInfos]')
+    newInfos = copy.deepcopy(variableInfos.find('hkobject'))
+    newInfos.find('hkparam[@name="type"]').text = Type
+    variableInfos.append(newInfos)
+    variableInfos.set("numelements", str(int(variableInfos.get("numelements"))+1))
+
+    wordVariableValues = __data__.find('hkobject[@class="hkbVariableValueSet"]/hkparam[@name="wordVariableValues"]')
+    newInitVal = copy.deepcopy(wordVariableValues.find('hkobject'))
+    newInitVal.find("hkparam").text = InitVal
+    wordVariableValues.append(InitVal)
+    wordVariableValues.set("numelements", str(int(wordVariableValues.get("numelements"))+1))
+
+
 
 def divide_chunks(list1, n): 
   for i in range(0, len(list1), n): 
     yield list1[i:i + n] 
+
+def RemoveSuffix(s, suffix):
+    if suffix and s.endswith(suffix):
+        return s[:-len(suffix)]
+    return s
 
 exeFolder = os.path.dirname(sys.argv[0])
 
@@ -471,31 +620,34 @@ if TaeMode != "custom":
     TaeDef = configparser.ConfigParser(allow_no_value=True)
     TaeDef.read_file(open(os.path.join(exeFolder, "TaeIDList.ini")))
     TaeIDList = []
-    for TaeID in TaeDef.options(TaeMode):
-        if " - " in TaeID:
-            TaeRangeList = TaeID.split(" - ", 2)
-            try:
-                TaeMin = int(TaeRangeList[0])
-                TaeMax = int(TaeRangeList[1])
-                for i in range(TaeMin, TaeMax+1):
-                    TaeIDList.append(i)
-            except:
-                print("Invalid Tae input: " + TaeID)
+    try:
+        for TaeID in TaeDef.options(TaeMode):
+            if " - " in TaeID:
+                TaeRangeList = TaeID.split(" - ", 2)
+                try:
+                    TaeMin = int(TaeRangeList[0])
+                    TaeMax = int(TaeRangeList[1])
+                    for i in range(TaeMin, TaeMax+1):
+                        TaeIDList.append(i)
+                except:
+                    print("Invalid Tae input: " + TaeID)
 
-        elif "-" in TaeID:
-            TaeRangeList = TaeID.split("-", 2)
-            try:
-                TaeMin = int(TaeRangeList[0])
-                TaeMax = int(TaeRangeList[1])
-                for i in range(TaeMin, TaeMax+1):
-                    TaeIDList.append(i)
-            except:
-                print("Invalid Tae input: " + TaeID)
-        else:
-            try:
-                TaeIDList.append(int(TaeID))
-            except:
-                print("Invalid Tae input: " + TaeID)
+            elif "-" in TaeID:
+                TaeRangeList = TaeID.split("-", 2)
+                try:
+                    TaeMin = int(TaeRangeList[0])
+                    TaeMax = int(TaeRangeList[1])
+                    for i in range(TaeMin, TaeMax+1):
+                        TaeIDList.append(i)
+                except:
+                    print("Invalid Tae input: " + TaeID)
+            else:
+                try:
+                    TaeIDList.append(int(TaeID))
+                except:
+                    print("Invalid Tae input: " + TaeID)
+    except:
+        print("Invalid preset " + TaeMode)
 else:
     TaeIDList = []
     for TaeID in config.options("TaeID"):
@@ -538,6 +690,7 @@ if fileNameArgv1 == "c0000.anibnd.dcx":
     else:
         commaSeparatedTaeIDList = commaSeparatedTaeIDList[:-1]
         CallRegisterAnibnd(taeID=commaSeparatedTaeIDList, taeSubID=commaSeparatedAnimList)
+
 elif fileNameArgv1 == "c0000.behbnd.dcx":
     # Create Temporary Directory to unpack the behbnd into, Deletes the directory if it already exists.
     workFolderPath = os.path.join(exeFolder, "WorkFolder")
@@ -565,17 +718,24 @@ elif fileNameArgv1 == "c0000.behbnd.dcx":
     parser = etree.XMLParser(remove_blank_text=True)
     tree = etree.parse(workFolderc0000xmlPath, parser=parser)
     root = tree.getroot()
-    __data__ = root.find("hksection[@name='__data__']")    
+    __data__ = root.find("hksection[@name='__data__']")  
 
-    #append hkbClipGenerators and add them to CustomManualSelectorGenerators
-    for TaeID in TaeIDList:
-        if int(TaeID) > 999:
-            print("Tae ID " + str(TaeID) + "is too large.")
-        elif int(TaeID) < 0:
-            print("Tae ID " + str(TaeID) + "is too small.")
-        else:
-            for AnimID in AnimIDList:
-                CheckAndAppendAnim(TaeID, AnimID)
+    SpecialMode = config["General"]["specialmode"].lower()  
+
+    if SpecialMode == "none":
+        #append hkbClipGenerators and add them to CustomManualSelectorGenerators
+        for TaeID in TaeIDList:
+            if int(TaeID) > 999:
+                print("Tae ID " + str(TaeID) + "is too large.")
+            elif int(TaeID) < 0:
+                print("Tae ID " + str(TaeID) + "is too small.")
+            else:
+                for AnimID in AnimIDList:
+                    CheckAndAppendAnim(TaeID, AnimID)
+    elif SpecialMode == "blend":
+        GetLayerGenParams()
+    else:
+        print('Invalid SpecialMode "' + SpecialMode + '"')
 
     # write to c0000.xml in work folder
     tree.write(workFolderc0000xmlPath, encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
