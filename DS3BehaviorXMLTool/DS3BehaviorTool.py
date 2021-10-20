@@ -106,6 +106,7 @@ def GetUserData(StateMachineName):
         else:
             return UserData
 
+<<<<<<< HEAD
 def GetLayerGenParams():
     isValid = False
     while isValid != True:
@@ -223,6 +224,8 @@ def CreateLayerGen(Name, ScriptGenerator, StartAnimID, VarPrefix):
             __data__.append(BlendTemplate.getchildren())
 
 
+=======
+>>>>>>> parent of dec9338 (Initial LayerGenerator support)
 def GetCMSGParams(AnimID):
     isValid = False
     while isValid != True:
@@ -552,40 +555,12 @@ def GetVariableParams(Name):
         else:
             print("Invalid input")
 
-def CreateVariable(Name, Min, Max, Type, InitVal):
-    variableNames = __data__.find('hkobject[@class="hkbBehaviorGraphStringData"]/hkparam[@name=variableNames]')
-    etree.SubElement(variableNames, "hkcstring").text = Name
-    variableNames.set("numelements", str(int(variableNames.get("numelements"))+1))
-
-    variableBounds = __data__.find('hkobject[@class="hkbBehaviorGraphData"]/hkparam[@name=variableBounds]')
-    newBounds = copy.deepcopy(variableBounds.find('hkobject'))
-    newBounds.find('hkparam[@name="min"]/hkobject/hkparam').text = Min
-    newBounds.find('hkparam[@name="max"]/hkobject/hkparam').text = Max
-    variableBounds.append(newBounds)
-    variableBounds.set("numelements", str(int(variableBounds.get("numelements"))+1))
-
-    variableInfos = __data__.find('hkobject[@class="hkbBehaviorGraphData"]/hkparam[@name=variableInfos]')
-    newInfos = copy.deepcopy(variableInfos.find('hkobject'))
-    newInfos.find('hkparam[@name="type"]').text = Type
-    variableInfos.append(newInfos)
-    variableInfos.set("numelements", str(int(variableInfos.get("numelements"))+1))
-
-    wordVariableValues = __data__.find('hkobject[@class="hkbVariableValueSet"]/hkparam[@name="wordVariableValues"]')
-    newInitVal = copy.deepcopy(wordVariableValues.find('hkobject'))
-    newInitVal.find("hkparam").text = InitVal
-    wordVariableValues.append(InitVal)
-    wordVariableValues.set("numelements", str(int(wordVariableValues.get("numelements"))+1))
-
-
+def CreateVariable(Name):
+    return
 
 def divide_chunks(list1, n): 
   for i in range(0, len(list1), n): 
     yield list1[i:i + n] 
-
-def RemoveSuffix(s, suffix):
-    if suffix and s.endswith(suffix):
-        return s[:-len(suffix)]
-    return s
 
 exeFolder = os.path.dirname(sys.argv[0])
 
@@ -616,34 +591,31 @@ if TaeMode != "custom":
     TaeDef = configparser.ConfigParser(allow_no_value=True)
     TaeDef.read_file(open(os.path.join(exeFolder, "TaeIDList.ini")))
     TaeIDList = []
-    try:
-        for TaeID in TaeDef.options(TaeMode):
-            if " - " in TaeID:
-                TaeRangeList = TaeID.split(" - ", 2)
-                try:
-                    TaeMin = int(TaeRangeList[0])
-                    TaeMax = int(TaeRangeList[1])
-                    for i in range(TaeMin, TaeMax+1):
-                        TaeIDList.append(i)
-                except:
-                    print("Invalid Tae input: " + TaeID)
+    for TaeID in TaeDef.options(TaeMode):
+        if " - " in TaeID:
+            TaeRangeList = TaeID.split(" - ", 2)
+            try:
+                TaeMin = int(TaeRangeList[0])
+                TaeMax = int(TaeRangeList[1])
+                for i in range(TaeMin, TaeMax+1):
+                    TaeIDList.append(i)
+            except:
+                print("Invalid Tae input: " + TaeID)
 
-            elif "-" in TaeID:
-                TaeRangeList = TaeID.split("-", 2)
-                try:
-                    TaeMin = int(TaeRangeList[0])
-                    TaeMax = int(TaeRangeList[1])
-                    for i in range(TaeMin, TaeMax+1):
-                        TaeIDList.append(i)
-                except:
-                    print("Invalid Tae input: " + TaeID)
-            else:
-                try:
-                    TaeIDList.append(int(TaeID))
-                except:
-                    print("Invalid Tae input: " + TaeID)
-    except:
-        print("Invalid preset " + TaeMode)
+        elif "-" in TaeID:
+            TaeRangeList = TaeID.split("-", 2)
+            try:
+                TaeMin = int(TaeRangeList[0])
+                TaeMax = int(TaeRangeList[1])
+                for i in range(TaeMin, TaeMax+1):
+                    TaeIDList.append(i)
+            except:
+                print("Invalid Tae input: " + TaeID)
+        else:
+            try:
+                TaeIDList.append(int(TaeID))
+            except:
+                print("Invalid Tae input: " + TaeID)
 else:
     TaeIDList = []
     for TaeID in config.options("TaeID"):
@@ -686,7 +658,6 @@ if fileNameArgv1 == "c0000.anibnd.dcx":
     else:
         commaSeparatedTaeIDList = commaSeparatedTaeIDList[:-1]
         CallRegisterAnibnd(taeID=commaSeparatedTaeIDList, taeSubID=commaSeparatedAnimList)
-
 elif fileNameArgv1 == "c0000.behbnd.dcx":
     # Create Temporary Directory to unpack the behbnd into, Deletes the directory if it already exists.
     workFolderPath = os.path.join(exeFolder, "WorkFolder")
@@ -714,6 +685,7 @@ elif fileNameArgv1 == "c0000.behbnd.dcx":
     parser = etree.XMLParser(remove_blank_text=True)
     tree = etree.parse(workFolderc0000xmlPath, parser=parser)
     root = tree.getroot()
+<<<<<<< HEAD
     __data__ = root.find("hksection[@name='__data__']")  
 
     SpecialMode = config["General"]["specialmode"].lower() 
@@ -732,6 +704,19 @@ elif fileNameArgv1 == "c0000.behbnd.dcx":
         GetLayerGenParams()
     else:
         print('Invalid SpecialMode "' + SpecialMode + '"')
+=======
+    __data__ = root.find("hksection[@name='__data__']")    
+
+    #append hkbClipGenerators and add them to CustomManualSelectorGenerators
+    for TaeID in TaeIDList:
+        if int(TaeID) > 999:
+            print("Tae ID " + str(TaeID) + "is too large.")
+        elif int(TaeID) < 0:
+            print("Tae ID " + str(TaeID) + "is too small.")
+        else:
+            for AnimID in AnimIDList:
+                CheckAndAppendAnim(TaeID, AnimID)
+>>>>>>> parent of dec9338 (Initial LayerGenerator support)
 
     # write to c0000.xml in work folder
     tree.write(workFolderc0000xmlPath, encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
