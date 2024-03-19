@@ -19,7 +19,7 @@ def CallYabber(filePath):
     return subprocess.run([os.path.join(exeFolder, "Dependencies\Yabber\Yabber.exe"), filePath])
 
 def CallHkxPackSoulsDs3(filePath):
-    return subprocess.run([os.path.join(exeFolder, "Dependencies\hkxpack-souls\hkxpackds3.exe"), filePath])
+    return subprocess.run([os.path.join(exeFolder, "Dependencies\hkxpack-souls\hkxpack-souls.exe"), filePath])
 
 # get next free NameID
 def GetNameID():
