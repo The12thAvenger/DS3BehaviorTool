@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='ASCII' standalone='no'?>
-<hkobject class="hkbManualSelectorGenerator" name="#NameID" signature="0xeed8d5cd">
-      <hkparam name="variableBindingSet">variableBindingSet</hkparam>
-      <hkparam name="userData">0</hkparam>
-      <hkparam name="name">CMSGName_Selector</hkparam>
-      <hkparam name="generators" numelements="0"></hkparam>
-      <hkparam name="selectedGeneratorIndex">0</hkparam>
-      <hkparam name="indexSelector">null</hkparam>
-      <hkparam name="selectedIndexCanChangeAfterActivate">true</hkparam>
-      <hkparam name="generatorChangedTransitionEffect">generatorChangedTransitionEffect</hkparam>
+<hkobject class="hkbManualSelectorGenerator" name="#NameID" signature="0x591a8476">
+	<hkparam name="variableBindingSet">variableBindingSet</hkparam>
+	<hkparam name="userData">0</hkparam>
+	<hkparam name="name">CMSGName_Selector</hkparam>
+	<hkparam name="generators" numelements="0"></hkparam>
+	<hkparam name="selectedGeneratorIndex">0</hkparam>
+	<hkparam name="indexSelector">null</hkparam>
+	<hkparam name="selectedIndexCanChangeAfterActivate">true</hkparam>
+	<hkparam name="generatorChangedTransitionEffect">#527</hkparam>
+	<hkparam name="endOfClipEventId">-1</hkparam>
 </hkobject>
