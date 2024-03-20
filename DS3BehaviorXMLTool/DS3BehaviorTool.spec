@@ -4,8 +4,8 @@
 block_cipher = None
 
 
-a = Analysis(['DS3BehaviorXMLTool.py'],
-             pathex=['C:\\Users\\the12\\Desktop\\DS3BehaviorTool'],
+a = Analysis(['DS3BehaviorTool.py'],
+             pathex=['C:/Users/Admin/source/repos/DS3BehaviorTool/DS3BehaviorXMLTool'],
              binaries=[],
              datas=[],
              hiddenimports=[],
