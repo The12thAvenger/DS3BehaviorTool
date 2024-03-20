@@ -106,7 +106,6 @@ def GetUserData(StateMachineName):
         else:
             return UserData
 
-<<<<<<< HEAD
 def GetLayerGenParams():
     isValid = False
     while isValid != True:
@@ -227,9 +226,6 @@ def CreateLayerGen(Name, ScriptGenerator, StartAnimID, VarPrefix):
 
             __data__.append(BlendTemplate.getchildren())
 
-
-=======
->>>>>>> parent of dec9338 (Initial LayerGenerator support)
 def GetCMSGParams(AnimID):
     isValid = False
     while isValid != True:
@@ -689,7 +685,6 @@ elif fileNameArgv1 == "c0000.behbnd.dcx":
     parser = etree.XMLParser(remove_blank_text=True)
     tree = etree.parse(workFolderc0000xmlPath, parser=parser)
     root = tree.getroot()
-<<<<<<< HEAD
     __data__ = root.find("hksection[@name='__data__']")  
 
     SpecialMode = config["General"]["specialmode"].lower()  
@@ -708,7 +703,6 @@ elif fileNameArgv1 == "c0000.behbnd.dcx":
         GetLayerGenParams()
     else:
         print('Invalid SpecialMode "' + SpecialMode + '"')
-=======
     __data__ = root.find("hksection[@name='__data__']")    
 
     #append hkbClipGenerators and add them to CustomManualSelectorGenerators
@@ -720,7 +714,6 @@ elif fileNameArgv1 == "c0000.behbnd.dcx":
         else:
             for AnimID in AnimIDList:
                 CheckAndAppendAnim(TaeID, AnimID)
->>>>>>> parent of dec9338 (Initial LayerGenerator support)
 
     # write to c0000.xml in work folder
     tree.write(workFolderc0000xmlPath, encoding="ASCII", xml_declaration=True, method="xml", standalone=False, pretty_print=True)
